@@ -8,10 +8,6 @@ namespace RoutePlanner.APIInterfaces
     public class APIConsole
     {
         private IRoutePlannerBL routePlanner;
-        public APIConsole(IRoutePlannerBL routePlanner)
-        {
-            this.routePlanner = routePlanner;
-        }
         private const string PARAMETERS_DESCRIPTION =
             @"RoutePlanerr: error. CheckParameters
             Usage: RoutePlanner --setup <list_of_Routes> [command] [arguments]
@@ -21,9 +17,12 @@ namespace RoutePlanner.APIInterfaces
             --numberTrips <route> <stops>. Returns the number of routes between two academies with n stops. Ej --numberTrips A-C 4
             --shortestRoute <route>. Returns the shortest route between two points. Ej. --shortestRoute A-C";
         private const string NO_SUCH_ROUTE = "NO SUCH ROUTE";
+        public APIConsole(IRoutePlannerBL routePlanner)
+        {
+            this.routePlanner = routePlanner;
+        }
         public string ResolveQuery(string[] args)
         {
-
             if (args.Length < 3) return PARAMETERS_DESCRIPTION;
 
             try
@@ -37,7 +36,6 @@ namespace RoutePlanner.APIInterfaces
                 return PARAMETERS_DESCRIPTION;
             }
         }
-
         private string RunQuery(string[] paramsQuery)
         {
             if (paramsQuery.Length < 1)
@@ -51,26 +49,24 @@ namespace RoutePlanner.APIInterfaces
                 case "--numbertrips":
                     return QueryNumberTrips(paramsQuery);
                 case "--shortestroute":
-                     return QueryShortestRoute(paramsQuery);
+                    return QueryShortestRoute(paramsQuery);
                 default:
                     return PARAMETERS_DESCRIPTION;
 
             }
         }
-
         private string QueryShortestRoute(string[] paramsQuery)
         {
             var route = this.GetRoute(paramsQuery[1]);
             if (route.Length != 2) return PARAMETERS_DESCRIPTION;
-            
+
             var distance = routePlanner.ShortestRoute(new Academy() { Name = route[0] }, new Academy() { Name = route[1] });
 
             if (distance == int.MaxValue)
                 return NO_SUCH_ROUTE;
-                
+
             return distance.ToString();
         }
-
         private string QueryNumberTrips(string[] paramsQuery)
         {
             var route = this.GetRoute(paramsQuery[1]);
@@ -83,7 +79,6 @@ namespace RoutePlanner.APIInterfaces
 
             return numRoutes.ToString();
         }
-
         private string QueryDistance(string[] paramsQuery)
         {
             var route = this.GetRoute(paramsQuery[1]);
@@ -94,7 +89,6 @@ namespace RoutePlanner.APIInterfaces
             if (distance < 0) return NO_SUCH_ROUTE;
             return distance.ToString();
         }
-
         private string[] SetupRoutePlanner(string[] args)
         {
             if (args[1].ToUpper() != "--setup".ToUpper())
@@ -113,7 +107,6 @@ namespace RoutePlanner.APIInterfaces
             }
             throw new Exception("Incorrect Parameters");
         }
-
         private void SetupRoute(string route, string distance)
         {
             var academies = GetRoute(route);
@@ -129,7 +122,6 @@ namespace RoutePlanner.APIInterfaces
 
             routePlanner.AddRoute(new Academy { Name = academies[0] }, new Academy { Name = academies[1] }, weight);
         }
-
         private string[] GetRoute(string route)
         {
             return route.Split('-');

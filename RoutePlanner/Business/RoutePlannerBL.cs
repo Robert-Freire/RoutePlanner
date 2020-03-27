@@ -25,7 +25,6 @@ namespace RoutePlanner.Business
             }
             return distance;
         }
-
         public int GetRoutes(Academy from, Academy to, int numberOfJumps, ref int routesFound)
         {
             var origin = graph.NodeDictionary[from.Name];
@@ -49,7 +48,6 @@ namespace RoutePlanner.Business
 
             return routesFound;
         }
-
         public int ShortestRoute(Academy from, Academy to)
         {
             return graph.ShortestRoute(new Node<Academy>(from, from.Name), new Node<Academy>(to, to.Name));
@@ -60,6 +58,5 @@ namespace RoutePlanner.Business
             return graph.GetConnection(new Node<Academy>(from, from.Name),
                                         new Node<Academy>(to, to.Name));
         }
-
     }
 }

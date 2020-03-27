@@ -6,11 +6,9 @@ namespace RoutePlanner.Model
 {
     public class Node<T> : INodeElement<T>, IEquatable<INodeElement<T>>
     {
-        // Private member-variables
         private T data;
         private string id;
         private IList<INodeElement<T>> neighbors = new List<INodeElement<T>>();
-        //    public IList<INodeElement<T>> Neighbors => throw new System.NotImplementedException();
         private IList<int> weights = new List<int>();
         public Node(T data, string id)
         {
@@ -27,7 +25,6 @@ namespace RoutePlanner.Model
         {
             return this.id == other.Id;
         }
-
         public int GetWeight(INodeElement<T> to)
         {
             var pos = getNeighbor(to);
@@ -36,7 +33,6 @@ namespace RoutePlanner.Model
 
             throw new System.Exception("Route not found");
         }
-
         private int getNeighbor(INodeElement<T> to)
         {
             for (var i = 0; i < this.neighbors.Count; i++)

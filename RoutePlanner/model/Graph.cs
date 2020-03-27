@@ -6,14 +6,11 @@ namespace RoutePlanner.Model
     public class Graph<T>
     {
         private Dictionary<string, INodeElement<T>> dictNodes = new Dictionary<string, INodeElement<T>>();
-
+        public Dictionary<string, INodeElement<T>> NodeDictionary { get => dictNodes; }
         public void AddNode(INodeElement<T> node)
         {
             this.dictNodes.Add(node.Id, node);
         }
-
-        public Dictionary<string, INodeElement<T>> NodeDictionary { get => dictNodes; }
-
         public void AddConnection(INodeElement<T> from, INodeElement<T> to, int weight)
         {
             from = this.getNodeInGraph(from);
@@ -70,7 +67,6 @@ namespace RoutePlanner.Model
             }
             return distances[elements.FindIndex(e => e.Id == to.Id)];
         }
-
         public int GetConnection(INodeElement<T> from, INodeElement<T> to)
         {
             try
@@ -82,8 +78,6 @@ namespace RoutePlanner.Model
                 return -1;
             }
         }
-
-
         private INodeElement<T> getNodeInGraph(INodeElement<T> node)
         {
             INodeElement<T> existingKey = null;
@@ -95,43 +89,5 @@ namespace RoutePlanner.Model
 
             return existingKey;
         }
-
-        // public bool Contains(T value)
-        // {
-        //     return nodeSet.FindByValue(value) != null;
-        // }
-
-        // public bool Remove(T value)
-        // {
-        //     // first remove the node from the nodeset
-        //     GraphNode<T> nodeToRemove = (GraphNode<T>) nodeSet.FindByValue(value);
-        //     if (nodeToRemove == null)
-        //         // node wasn't found
-        //         return false;
-
-        //     // otherwise, the node was found
-        //     nodeSet.Remove(nodeToRemove);
-
-        //     // enumerate through each node in the nodeSet, removing edges to this node
-        //     foreach (GraphNode<T> gnode in nodeSet)
-        //     {
-        //         int index = gnode.Neighbors.IndexOf(nodeToRemove);
-        //         if (index != -1)
-        //         {
-        //             // remove the reference to the node and associated cost
-        //             gnode.Neighbors.RemoveAt(index);
-        //             gnode.Costs.RemoveAt(index);
-        //         }
-        //     }
-
-        //     return true;
-        // }
-
-
-
-        // public int Count
-        // {
-        //     get { return nodeSet.Count; }
-        // }
     }
 }

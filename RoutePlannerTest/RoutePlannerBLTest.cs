@@ -69,6 +69,7 @@ namespace RoutePlannerTest
             var numRoutes = 0;
             routePlanner.GetRoutes(academyC, academyC, 3, ref numRoutes);
             routePlanner.GetRoutes(academyC, academyC, 2, ref numRoutes);
+
             // Assert
             Assert.AreEqual(2, numRoutes);
         }

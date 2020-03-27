@@ -59,31 +59,5 @@ namespace RoutePlannerTest
             Assert.IsTrue(academies.Count(a => a.Name == "B") == 1);
             Assert.IsTrue(academies.Count() == 2);
         }
-//        delegate void MethodCallback(Academy a, Academy b, int c, ref int j);
-
-//         [TestMethod]
-//         public void ResolveQuery_GetRoutes_GetRoutesIsCalled()
-//         {
-            
-//             // Arrange
-//             Academy academyFrom = new Academy();
-//             Academy academyTo = new Academy();
-//             int jumps = 0;
-//             string[] parameters = { "--setup", "A-B", "5", "--numberTrips", "A-C", "4" };
-//             routePlannerMock.Setup(m => m.GetRoutes(It.IsAny<Academy>(), It.IsAny<Academy>(), It.IsAny<int>(), ref It.Ref<int>.IsAny))
-       
-// .Callback (new MethodCallback(Academy a, Academy b, int c, ref int j) => {
-//                     param3= arrayRes;
-//                 }))
-
-//                      //    .Callback<Academy, Academy, int, ref int>((a, b, j, n) => { academyFrom = a; academyTo = b; jumps = j; });
-//             // Action
-//             consoleIF.ResolveQuery(parameters);
-
-//             // Assert
-//             Assert.AreEqual("A", academyFrom.Name);
-//             Assert.AreEqual("B", academyTo.Name);
-//             Assert.AreEqual(4, jumps);
-//         }
     }
 }
