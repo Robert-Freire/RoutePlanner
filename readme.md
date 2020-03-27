@@ -39,9 +39,9 @@ There are several ways to execute the application. You can
 
 ```console
 cd RoutePlanner
-dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --distance A-B-C
+dotnet run --setup A-B 5 B-C 4 --distance A-B-C
 dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --distance A-E-B-C-D
-dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --distance A-E-D
+dotnet run --setup A-B 5 --distance A-E-D
 dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --numberTrips A-C 4
 dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --shortestRoute A-C
 
@@ -53,7 +53,7 @@ dotnet run --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --short
 cd RoutePlanner\bin\Debug\netcoreapp3.1
 RoutePlanner.exe --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --distance C-D-C
 RoutePlanner.exe --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --numberTrips C-C 2
-RoutePlanner.exe --setup A-B 5 B-C 4 C-D 8 D-C 8 D-E 6 A-D 5 C-E 2 E-B 3 A-E 7 --shortestRoute A-C
+RoutePlanner.exe --setup A-B --shortestRoute A-C
 ```
 
 ## Running the tests
@@ -106,7 +106,7 @@ As I ran out of time the project is not fully tested and also not all the questi
     ```
 1. The number of trips starting at C and ending at C with a maximum of 3 stops. In the
 sample data below, there are two such trips: C-D-C (2 stops) and C-E-B-C (3 stops).
- * Tested.     
+   * Tested.     
     ```c#
     getRoutes_FromCtoCinMax3Stops_2RoutesFound
     ```
@@ -135,20 +135,20 @@ sample data below, there are two such trips: C-D-C (2 stops) and C-E-B-C (3 stop
     * Not solved.
 
 ### Implementation details
-    The application has been split in three-layer
-    * data. 
-        Includes the basic data of the application, Academies, and the nodes that we use to build the graph
-    * Business. 
-        Includes the logic of the application, that in our case is split between the graph, a data structure to store  graphs, as the graph has a logic I preferred to put this class in the Business although this can be arguable, and a RoutePlanner that uses the graph to solve the different problems
-    * APIInterfaces.
-        Includes the interfaces between our application and the world in our case we only implemented one APIConsole that allows us to interpret the instructions from the command line
+ The application has been split in three-layer
+ * data. 
+     Includes the basic data of the application, Academies, and the nodes that we use to build the graph
+ * Business. 
+     Includes the logic of the application, that in our case is split between the graph, a data structure to store  graphs, as the graph has a logic I preferred to put this class in the Business although this can be arguable, and a RoutePlanner that uses the graph to solve the different problems
+ * APIInterfaces.
+     Includes the interfaces between our application and the world in our case we only implemented one APIConsole that allows us to interpret the instructions from the command line
 
 ### Implementation notes
-    The application due to time/specification constraints has some weakness that I want to notice.
-    * Is missing a defensive programming approach. 
-    * There are no tests for edge cases.
-    * There are no tests for wrong parameters.
-    * There are home-made solutions in place of external libraries. As:
-        * Graph data structure.
-        * Dependency injection.
-        * Parameter parser.
+ The application due to time/specification constraints has some weakness that I want to notice.
+ * Is missing a defensive programming approach. 
+ * There are no tests for edge cases.
+ * There are no tests for wrong parameters.
+ * There are home-made solutions in place of external libraries. As:
+     * Graph data structure.
+     * Dependency injection.
+     * Parameter parser.
