@@ -22,20 +22,20 @@ dotnet build
 #### Console arguments
 To execute the application you must supply the configuration parameters and the query to execute
 
---setup <list_of_Routes> [command] [arguments]
-<list_of_Routes> list of pair <route> distance. You can enter so many routes as you want, but the router are all in the format from-to e.g. A-B 4 B-C 6
-<route> a route is a set of academies separated by - e.g. A-B-C is the route that goes from A to C passing by B
+--setup *list_of_Routes* [command] [arguments]\
+*list_of_Routes* list of pair *route* distance. You can enter so many routes as you want, but the router are all in the format from-to e.g. A-B 4 B-C 6\
+*route* a route is a set of academies separated by - e.g. A-B-C is the route that goes from A to C passing by B.
 
-The application supports these commands
---distance <route>. Returns the distance of a route e.g. --distance A-B-C
---numberTrips <route> <stops>. Returns the number of routes between two academies with n stops. Ej --numberTrips A-C 4
---shortestRoute <route>. Returns the shortest route between two points. e.g. --shortestRoute A-C
+The application supports these commands\
+--distance *route*. Returns the distance of a route e.g. --distance A-B-C\
+--numberTrips *route* *stops*. Returns the number of routes between two academies with n stops. Ej --numberTrips A-C 4\
+--shortestRoute *route*. Returns the shortest route between two points. e.g. --shortestRoute A-C\
 
 
 ### Execution
 
 There are several ways to execute the application. You can 
-* Go to the folder RoutePlanner inside the solution and execute dotnet run --setup <list_of_Routes> [command] [arguments]. For example
+* Go to the folder RoutePlanner inside the solution and execute dotnet run --setup *list_of_Routes* [command] [arguments]. For example
 
 ```console
 cd RoutePlanner
