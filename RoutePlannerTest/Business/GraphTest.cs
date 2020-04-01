@@ -39,5 +39,28 @@ namespace RoutePlannerTest
                                             new Node<Academy>(academyB, academyB.Name));
             Assert.AreEqual(distance, result);
         }
+
+        [TestMethod]
+        public void ShortestRoute_fromAtoC_4IsReturned()
+        {
+            // Arrange
+            var graph = new Graph<string>();
+            var pointA = "A";
+            var nodeA = new Node<string>(pointA, pointA);
+            var pointB = "B";
+            var nodeB = new Node<string>(pointB, pointB);
+            var pointC = "C";
+            var nodeC = new Node<string>(pointC, pointC);
+
+            graph.AddConnection(nodeA, nodeB, 2);
+            graph.AddConnection(nodeB, nodeC, 2);
+            graph.AddConnection(nodeA, nodeC, 8);
+
+            // Action
+            var distance = graph.ShortestRoute(nodeA, nodeC);
+
+            // Assert
+            Assert.AreEqual(4, distance);
+        }
     }
 }
