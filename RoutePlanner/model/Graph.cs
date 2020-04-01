@@ -57,10 +57,13 @@ namespace RoutePlanner.Model
                 foreach (var neighbor in elements[elemActual].Neighbors)
                 {
                     var nextVisit = elements.FindIndex(e => e.Id == neighbor.Id);
-                    if (distances[nextVisit] > distances[elemActual] + elements[elemActual].GetWeight(neighbor))
+                    if (distances[elemActual] < int.MaxValue) // this node is out of reach
                     {
-                        distances[nextVisit] = distances[elemActual] + elements[elemActual].GetWeight(neighbor);
-                    };
+                        if (distances[nextVisit] > distances[elemActual] + elements[elemActual].GetWeight(neighbor))
+                        {
+                            distances[nextVisit] = distances[elemActual] + elements[elemActual].GetWeight(neighbor);
+                        };
+                    }
 
                 }
                 visited[elemActual] = true;
