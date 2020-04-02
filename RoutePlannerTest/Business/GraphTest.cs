@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RoutePlanner.Business.Graph;
 using RoutePlanner.Model;
 
 namespace RoutePlannerTest

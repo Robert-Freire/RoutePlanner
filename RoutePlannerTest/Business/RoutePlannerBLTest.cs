@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoutePlanner.Business;
+using RoutePlanner.Business.Graph;
 using RoutePlanner.Model;
 
 namespace RoutePlannerTest
@@ -18,7 +19,7 @@ namespace RoutePlannerTest
         public void GetDistance_RouteABC_9IsReturned()
         {
             // Arrange
-            var routePlanner = new RoutePlannerBL();
+            var routePlanner = new RoutePlannerBL(new Graph<Academy>());
             routePlanner.AddRoute(academyA, academyB, 5);
             routePlanner.AddRoute(academyB, academyC, 4);
             var routeQuery = new List<Academy>() { academyA, academyB, academyC };
@@ -102,7 +103,7 @@ namespace RoutePlannerTest
         }
         private RoutePlannerBL DefaultPlanerSetup()
         {
-            var routePlanner = new RoutePlannerBL();
+            var routePlanner = new RoutePlannerBL(new Graph<Academy>());
 
             routePlanner.AddRoute(academyA, academyB, 5);
             routePlanner.AddRoute(academyB, academyC, 4);

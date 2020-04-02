@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace RoutePlanner.Model
+namespace RoutePlanner.Business.Graph
 {
     public class Node<T> : INodeElement<T>, IEquatable<INodeElement<T>>
     {

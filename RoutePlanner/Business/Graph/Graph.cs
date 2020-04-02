@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RoutePlanner.Model
+namespace RoutePlanner.Business.Graph
 {
-    public class Graph<T>
+    public class Graph<T> : IGraph<T>
     {
         private Dictionary<string, INodeElement<T>> dictNodes = new Dictionary<string, INodeElement<T>>();
         public Dictionary<string, INodeElement<T>> NodeDictionary { get => dictNodes; }

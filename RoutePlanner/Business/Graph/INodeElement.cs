@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoutePlanner.Model
+namespace RoutePlanner.Business.Graph
 {
     public interface INodeElement<T>
     {

@@ -1,14 +1,19 @@
 using System.Collections.Generic;
+using RoutePlanner.Business.Graph;
 using RoutePlanner.Model;
 
 namespace RoutePlanner.Business
 {
     public class RoutePlannerBL : IRoutePlannerBL
     {
-        private Graph<Academy> graph = new Graph<Academy>();
+        private IGraph<Academy> Graph;
+        public RoutePlannerBL(IGraph<Academy> graph)
+        {
+            Graph = graph;
+        }
         public void AddRoute(Academy from, Academy to, int distance)
         {
-            graph.AddConnection(new Node<Academy>(from, from.Name),
+            Graph.AddConnection(new Node<Academy>(from, from.Name),
                                 new Node<Academy>(to, to.Name),
                                 distance);
         }
@@ -27,7 +32,7 @@ namespace RoutePlanner.Business
         }
         public int GetRoutes(Academy from, Academy to, int numberOfJumps, ref int routesFound)
         {
-            var origin = graph.NodeDictionary[from.Name];
+            var origin = Graph.NodeDictionary[from.Name];
             if (numberOfJumps == 1)
             {
                 foreach (var dest in origin.Neighbors)
@@ -50,12 +55,12 @@ namespace RoutePlanner.Business
         }
         public int ShortestRoute(Academy from, Academy to)
         {
-            return graph.ShortestRoute(new Node<Academy>(from, from.Name), new Node<Academy>(to, to.Name));
+            return Graph.ShortestRoute(new Node<Academy>(from, from.Name), new Node<Academy>(to, to.Name));
 
         }
         private int GetDistance(Academy from, Academy to)
         {
-            return graph.GetConnection(new Node<Academy>(from, from.Name),
+            return Graph.GetConnection(new Node<Academy>(from, from.Name),
                                         new Node<Academy>(to, to.Name));
         }
     }
