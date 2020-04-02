@@ -5,7 +5,8 @@ using RoutePlanner.Model;
 
 namespace RoutePlanner.APIInterfaces
 {
-    public class APIConsole
+
+    public class APIConsole : IAPIConsole
     {
         private IRoutePlannerBL routePlanner;
         private const string PARAMETERS_DESCRIPTION =
