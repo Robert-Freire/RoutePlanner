@@ -59,7 +59,6 @@ namespace RoutePlannerTest
             Assert.AreEqual(-1, distance);
         }
 
-
         [TestMethod]
         public void getRoutes_FromCtoCinMax3Stops_2RoutesFound()
         {

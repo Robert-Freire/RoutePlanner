@@ -59,5 +59,31 @@ namespace RoutePlannerTest
             Assert.IsTrue(academies.Count(a => a.Name == "B") == 1);
             Assert.IsTrue(academies.Count() == 2);
         }
+
+        delegate void GetRoutesCallback(Academy from, Academy to, int numberOfJumps, ref int routesFound);     // needed for Callback
+        delegate int GetRoutesReturns(Academy from, Academy to, int numberOfJumps, ref int routesFound);      // needed for Returns
+
+        [TestMethod]
+        public void ResolveQuery_QueryNumberTrips_GetDistanceIsCalled()
+        {
+            // Arrange
+            Academy from = null;
+            Academy to = null;
+            int jumps = 0;
+            string[] parameters = { "--setup", "A-B", "4", "B-C", "3", "A-C", "5", "--numberTrips", "A-C", "2" };
+            routePlannerMock.Setup(m => m.GetRoutes(It.IsAny<Academy>(), It.IsAny<Academy>(), It.IsAny<int>(), ref It.Ref<int>.IsAny))
+                .Callback(new GetRoutesCallback((Academy a, Academy b, int c, ref int d) => { from = a; to = b; jumps = c; d = 1; }))
+                .Returns(new GetRoutesReturns((Academy a, Academy b, int c, ref int d) => { return 1; }));
+
+            // Action
+            var result = APIconsole.ResolveQuery(parameters);
+
+            // Assert
+            Assert.AreEqual("1", result);
+            routePlannerMock.Verify(m => m.GetRoutes(It.IsAny<Academy>(), It.IsAny<Academy>(), It.IsAny<int>(), ref It.Ref<int>.IsAny), Times.Once());
+            Assert.AreEqual("A", from.Name);
+            Assert.AreEqual("C", to.Name);
+            Assert.AreEqual(2, jumps);
+        }
     }
 }
